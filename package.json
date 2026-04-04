@@ -1,0 +1,137 @@
+{
+  "name": "relax-reminder",
+  "displayName": "🐾 Pets Reminder",
+  "description": "Cute virtual pets roaming your VS Code while reminding you to take breaks. Features all 12 Chinese zodiac animals + more!",
+  "version": "1.0.0",
+  "publisher": "relax-reminder",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["pets", "relaxation", "reminder", "fun", "virtual pets", "zodiac"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "relaxReminderPanel",
+          "title": "🐾 Pets Reminder",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "relaxReminderPanel": [
+        {
+          "type": "webview",
+          "id": "relaxReminder.petView",
+          "name": "Virtual Pets",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "relaxReminder.showPets",
+        "title": "Show Virtual Pets",
+        "category": "Pets Reminder",
+        "icon": "$(heart)"
+      },
+      {
+        "command": "relaxReminder.openSettings",
+        "title": "Open Settings",
+        "category": "Pets Reminder",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "relaxReminder.resetTimer",
+        "title": "Reset Break Timer",
+        "category": "Pets Reminder",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "relaxReminder.snooze",
+        "title": "Snooze 15 Minutes",
+        "category": "Pets Reminder",
+        "icon": "$(bell-slash)"
+      }
+    ],
+    "configuration": {
+      "title": "Pets Reminder",
+      "properties": {
+        "relaxReminder.reminderIntervalMinutes": {
+          "type": "number",
+          "default": 120,
+          "minimum": 1,
+          "maximum": 480,
+          "markdownDescription": "How often to remind you to take a break **(in minutes)**. Default: 120 min (2 hours)"
+        },
+        "relaxReminder.selectedPets": {
+          "type": "array",
+          "default": ["cat", "dog", "rabbit"],
+          "items": {
+            "type": "string",
+            "enum": [
+              "rat", "ox", "tiger", "rabbit", "dragon", "snake",
+              "horse", "goat", "monkey", "rooster", "dog", "pig",
+              "cat", "bird", "bee", "butterfly", "parrot"
+            ],
+            "enumDescriptions": [
+              "🐀 Rat (Zi)", "🐂 Ox (Chou)", "🐯 Tiger (Yin)", "🐰 Rabbit (Mao)",
+              "🐲 Dragon (Chen)", "🐍 Snake (Si)", "🐴 Horse (Wu)", "🐐 Goat (Wei)",
+              "🐒 Monkey (Shen)", "🐓 Rooster (You)", "🐕 Dog (Xu)", "🐷 Pig (Hai)",
+              "🐱 Cat", "🐦 Bird", "🐝 Bee", "🦋 Butterfly", "🦜 Parrot"
+            ]
+          },
+          "description": "List of pet types to display"
+        },
+        "relaxReminder.petCount": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Maximum number of pets shown at once"
+        },
+        "relaxReminder.petSpeed": {
+          "type": "string",
+          "default": "normal",
+          "enum": ["slow", "normal", "fast"],
+          "enumDescriptions": ["🐌 Slow & relaxed", "🚶 Normal pace", "🏃 Fast & energetic"],
+          "description": "Pet movement speed"
+        },
+        "relaxReminder.autoShowOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically show the pet panel when VS Code starts"
+        }
+      }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "relaxReminder.openSettings",
+          "when": "view == relaxReminder.petView",
+          "group": "navigation"
+        },
+        {
+          "command": "relaxReminder.resetTimer",
+          "when": "view == relaxReminder.petView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
