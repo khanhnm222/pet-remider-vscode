@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7c6fef"/>
+      <stop offset="100%" stop-color="#4c3fd1"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#bg)"/>
+  <!-- Paw print -->
+  <g fill="rgba(255,255,255,0.95)" filter="url(#glow)">
+    <!-- Main pad -->
+    <ellipse cx="50" cy="62" rx="14" ry="11"/>
+    <!-- Top toes -->
+    <circle cx="34" cy="48" r="7"/>
+    <circle cx="50" cy="43" r="7"/>
+    <circle cx="66" cy="48" r="7"/>
+    <!-- Claws hint (tiny circles) -->
+    <circle cx="28" cy="59" r="5"/>
+    <circle cx="72" cy="59" r="5"/>
+  </g>
+  <!-- Small heart accent -->
+  <text x="50" y="35" font-size="14" text-anchor="middle" fill="rgba(255,255,255,0.5)">♥</text>
+</svg>
+ 
